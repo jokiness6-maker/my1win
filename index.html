@@ -2,37 +2,55 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Мой сайт</title>
+  <title>Добро пожаловать</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       text-align: center;
-      background: url("https://picsum.photos/1920/1080") no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
       color: white;
     }
-    .container {
-      padding: 80px 20px;
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
+
+    .container {
+      padding: 100px 20px;
+    }
+
     h1 {
-      font-size: 46px;
+      font-size: 50px;
       margin-bottom: 40px;
       animation: fadeIn 2s ease-in-out;
+      text-shadow: 2px 2px 8px black;
     }
-    button {
+
+    p {
+      font-size: 22px;
+      margin-bottom: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    a.button {
+      display: inline-block;
       background: linear-gradient(90deg, #ff0000, #ff9900);
       color: white;
       font-weight: bold;
-      border: none;
+      text-decoration: none;
       padding: 15px 35px;
       font-size: 20px;
       border-radius: 12px;
-      cursor: pointer;
-      transition: 0.5s;
+      transition: 0.4s;
     }
-    button:hover {
+
+    a.button:hover {
       transform: scale(1.1);
       background: linear-gradient(90deg, #ff9900, #ff0000);
     }
@@ -45,8 +63,9 @@
 </head>
 <body>
   <div class="container">
-    <h1>Добро пожаловать 🚀</h1>
-    <button>Нажми сюда</button>
+    <h1>🔥 Добро пожаловать на мой сайт 🔥</h1>
+    <p>Здесь ты найдёшь всё самое интересное 🚀</p>
+    <a href="https://example.com" class="button">Перейти</a>
   </div>
 </body>
 </html>
