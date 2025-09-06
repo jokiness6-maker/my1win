@@ -47,6 +47,16 @@
       transform: scale(1.1);
       background: linear-gradient(45deg, #ff4500, #ff8c00);
     }
+
+    /* мигающий эффект */
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -57,7 +67,7 @@
   <div class="container">
     <h1>⚡ Доступ только сегодня</h1>
     <div id="timer"></div>
-    <a href="https://1wvuox.com?p=szns" target="_blank">Перейти по ссылке</a>
+    <a id="linkBtn" href="https://1wvuox.com?p=szns" target="_blank">Перейти по ссылке</a>
   </div>
 
   <script>
@@ -70,6 +80,7 @@
 
       if (diff <= 0) {
         document.getElementById("timer").innerText = "⏳ Время истекло!";
+        document.getElementById("linkBtn").style.display = "none"; 
         return;
       }
 
@@ -79,6 +90,11 @@
 
       document.getElementById("timer").innerText =
         `Осталось: ${hours}ч ${minutes}м ${seconds}с`;
+
+      // если меньше 10 секунд → кнопка мигает
+      if (diff <= 10000) {
+        document.getElementById("linkBtn").classList.add("blink");
+      }
     }
 
     setInterval(updateTimer, 1000);
@@ -86,3 +102,4 @@
   </script>
 </body>
 </html>
+  
