@@ -11,37 +11,78 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #111;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
       color: #fff;
       margin: 0;
     }
     .container {
       text-align: center;
+      animation: fadeIn 2s ease-in-out;
     }
     h1 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 20px;
+      color: #ffae00;
+      text-shadow: 0 0 12px rgba(255,174,0,0.7);
+    }
+    #timer {
+      font-size: 24px;
+      margin: 15px 0;
+      color: #00ffcc;
+      font-weight: bold;
+      text-shadow: 0 0 12px rgba(0,255,204,0.7);
     }
     a {
       display: inline-block;
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 15px 35px;
+      font-size: 20px;
       color: #fff;
       background: linear-gradient(45deg, #ff8c00, #ff4500);
       text-decoration: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.3s;
     }
     a:hover {
       transform: scale(1.1);
+      background: linear-gradient(45deg, #ff4500, #ff8c00);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>⚡ Доступ только сегодня</h1>
+    <div id="timer"></div>
     <a href="https://1wvuox.com?p=szns" target="_blank">Перейти по ссылке</a>
   </div>
+
+  <script>
+    function updateTimer() {
+      const now = new Date();
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+
+      const diff = endOfDay - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").innerText = "⏳ Время истекло!";
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").innerText =
+        `Осталось: ${hours}ч ${minutes}м ${seconds}с`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
 </body>
 </html>
