@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Доступ только сегодня</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 Доступ только сегодня</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,91 +11,39 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      color: #fff;
-      margin: 0;
-    }
-    .container {
+      background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+      color: white;
       text-align: center;
-      animation: fadeIn 1.5s ease-in-out;
+    }
+    .card {
+      background: #2a2a3d;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
     h1 {
-      font-size: 30px;
-      margin-bottom: 12px;
-      color: #ffae00;
-      text-shadow: 0 0 10px rgba(255,174,0,0.6);
+      margin-bottom: 20px;
     }
-    #timer {
-      font-size: 20px;
-      margin: 8px 0 18px;
-      color: #00ffcc;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(0,255,204,0.5);
-    }
-    a#linkBtn {
+    a {
       display: inline-block;
-      padding: 14px 34px;
-      font-size: 18px;
-      color: #fff;
-      background: linear-gradient(45deg, #ff8c00, #ff4500);
+      padding: 12px 25px;
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
-      transition: transform 0.16s ease, background 0.2s ease, opacity 0.2s;
-      cursor: pointer;
+      transition: 0.3s;
     }
-    a#linkBtn:hover { transform: translateY(-3px); }
-
-    /* blink */
-    @keyframes blink { 0%,50%,100%{opacity:1} 25%,75%{opacity:0} }
-    .blink { animation: blink 1s infinite; }
-
-    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    a:hover {
+      background: #ffaa00;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="card">
     <h1>⚡ Доступ только сегодня</h1>
-    <div id="timer">Загрузка...</div>
-    <a id="linkBtn" href="https://1wppbz.life?p=szns">Перейти по ссылке</a>
+    <p>Нажми на кнопку ниже, чтобы перейти</p>
+    <a href="https://1wppbz.life?p=szns" target="_blank">👉 Перейти</a>
   </div>
-
-  <script>
-    const TARGET = "https://1wppbz.life?p=szns"; // <-- твоя ссылка (точно)
-    const btn = document.getElementById("linkBtn");
-    const timerEl = document.getElementById("timer");
-
-    // при клике — заменить текущую страницу (без добавления в историю)
-    btn.addEventListener("click", function(e){
-      e.preventDefault();
-      // прежде чем идти — можно показать небольшой эффект/прелоад, но сразу редиректим
-      location.replace(TARGET);
-    });
-
-    function updateTimer() {
-      const now = new Date();
-      const endOfDay = new Date();
-      endOfDay.setHours(23, 59, 59, 999);
-      const diff = endOfDay - now;
-
-      if (diff <= 0) {
-        timerEl.innerText = "⏳ Время истекло!";
-        btn.style.display = "none";
-        return;
-      }
-
-      const h = Math.floor(diff / (1000*60*60));
-      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-      const s = Math.floor((diff % (1000*60)) / 1000);
-      timerEl.innerText = `Осталось: ${h}ч ${m}м ${s}с`;
-
-      // если <= 10 секунд — добавить мигание
-      if (diff <= 10000) btn.classList.add("blink");
-    }
-
-    // старт
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  </script>
 </body>
 </html>
