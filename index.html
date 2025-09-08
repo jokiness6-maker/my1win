@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Доступ только сегодня</title>
   <style>
     body {
@@ -17,88 +17,85 @@
     }
     .container {
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 1.5s ease-in-out;
     }
     h1 {
       font-size: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       color: #ffae00;
-      text-shadow: 0 0 12px rgba(255,174,0,0.7);
+      text-shadow: 0 0 10px rgba(255,174,0,0.6);
     }
     #timer {
-      font-size: 24px;
-      margin: 15px 0;
-      color: #00ffcc;
-      font-weight: bold;
-      text-shadow: 0 0 12px rgba(0,255,204,0.7);
-    }
-    a {
-      display: inline-block;
-      padding: 15px 35px;
       font-size: 20px;
+      margin: 8px 0 18px;
+      color: #00ffcc;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0,255,204,0.5);
+    }
+    a#linkBtn {
+      display: inline-block;
+      padding: 14px 34px;
+      font-size: 18px;
       color: #fff;
       background: linear-gradient(45deg, #ff8c00, #ff4500);
       text-decoration: none;
-      border-radius: 14px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease, background 0.3s;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+      transition: transform 0.16s ease, background 0.2s ease, opacity 0.2s;
+      cursor: pointer;
     }
-    a:hover {
-      transform: scale(1.1);
-      background: linear-gradient(45deg, #ff4500, #ff8c00);
-    }
+    a#linkBtn:hover { transform: translateY(-3px); }
 
-    /* мигающий эффект */
-    @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
-    }
-    .blink {
-      animation: blink 1s infinite;
-    }
+    /* blink */
+    @keyframes blink { 0%,50%,100%{opacity:1} 25%,75%{opacity:0} }
+    .blink { animation: blink 1s infinite; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>⚡ Доступ только сегодня</h1>
-    <div id="timer"></div>
-    <a id="linkBtn" href="https://1wppbz.life?p=szns" target="_blank">Перейти по ссылке</a>
+    <div id="timer">Загрузка...</div>
+    <a id="linkBtn" href="https://1wppbz.life?p=szns">Перейти по ссылке</a>
   </div>
 
   <script>
+    const TARGET = "https://1wppbz.life?p=szns"; // <-- твоя ссылка (точно)
+    const btn = document.getElementById("linkBtn");
+    const timerEl = document.getElementById("timer");
+
+    // при клике — заменить текущую страницу (без добавления в историю)
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+      // прежде чем идти — можно показать небольшой эффект/прелоад, но сразу редиректим
+      location.replace(TARGET);
+    });
+
     function updateTimer() {
       const now = new Date();
       const endOfDay = new Date();
       endOfDay.setHours(23, 59, 59, 999);
-
       const diff = endOfDay - now;
 
       if (diff <= 0) {
-        document.getElementById("timer").innerText = "⏳ Время истекло!";
-        document.getElementById("linkBtn").style.display = "none"; 
+        timerEl.innerText = "⏳ Время истекло!";
+        btn.style.display = "none";
         return;
       }
 
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const h = Math.floor(diff / (1000*60*60));
+      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const s = Math.floor((diff % (1000*60)) / 1000);
+      timerEl.innerText = `Осталось: ${h}ч ${m}м ${s}с`;
 
-      document.getElementById("timer").innerText =
-        `Осталось: ${hours}ч ${minutes}м ${seconds}с`;
-
-      // если меньше 10 секунд → кнопка мигает
-      if (diff <= 10000) {
-        document.getElementById("linkBtn").classList.add("blink");
-      }
+      // если <= 10 секунд — добавить мигание
+      if (diff <= 10000) btn.classList.add("blink");
     }
 
-    setInterval(updateTimer, 1000);
+    // старт
     updateTimer();
+    setInterval(updateTimer, 1000);
   </script>
 </body>
 </html>
