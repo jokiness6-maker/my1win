@@ -3,47 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔥 Доступ только сегодня</title>
+  <title>🔥 Твой бонус уже ждёт!</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a, #0f0f0f);
+      color: #fff;
+      text-align: center;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #1e1e2f, #2d2d44);
-      color: white;
-      text-align: center;
+      overflow: hidden;
     }
-    .card {
-      background: #2a2a3d;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
+
     h1 {
-      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc;
+      animation: glow 2s infinite alternate;
     }
-    a {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #ffcc00;
-      color: black;
-      font-weight: bold;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: 0.3s;
+
+    @keyframes glow {
+      from { text-shadow: 0 0 15px #00ffcc; }
+      to { text-shadow: 0 0 35px #00ffcc; }
     }
-    a:hover {
-      background: #ffaa00;
+
+    .timer {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: #ff4444;
+    }
+
+    .btn {
+      background: #00ffcc;
+      color: #000;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ffcc;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #00ffcc;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>⚡ Доступ только сегодня</h1>
-    <p>Нажми на кнопку ниже, чтобы перейти</p>
-    <a href="https://1wbqtd.life/v3/aggressive-casino" target="_blank">👉 Перейти</a>
-  </div>
+  <h1>🎁 Забери свой бонус прямо сейчас!</h1>
+  <div class="timer" id="countdown"></div>
+  <button class="btn" onclick="window.location.href='https://1wbqtd.life/v3/aggressive-casino'">
+    🚀 Получить бонус
+  </button>
+  <footer>© 2025 | Все права защищены</footer>
+
+  <script>
+    // Таймер на 24 часа
+    let countdownElement = document.getElementById("countdown");
+    let countDownDate = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+    let x = setInterval(function() {
+      let now = new Date().getTime();
+      let distance = countDownDate - now;
+
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `⏳ Осталось: ${hours}ч ${minutes}м ${seconds}с`;
+
+      if (distance < 0) {
+        clearInterval(x);
+        countdownElement.innerHTML = "🔥 Время вышло!";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
